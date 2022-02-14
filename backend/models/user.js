@@ -11,14 +11,14 @@ const userSchema = new mongo.Schema({
     ref: "roles",
   },
   bookShop:[{
-      type:mongoose.Schema.ObjectId, ref:"books",
+      type:mongo.Schema.ObjectId, ref:"books",
     }
   ],
   registerDate: {
     type: Date,
     default: Date.now,
   },
-  dbStatus: true,
+  dbStatus: Boolean,
 });
 
 const user = mongo.model("users", userSchema);

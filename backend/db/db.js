@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const dbConnection = () => {
+const dbConnection = async () => {
   try {
-    mongoose.connect(process.env.DB_URL, {
-      useNewUrlPraser: true,
+    await mongoose.connect(process.env.DB_URL, {
+      useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log("Connection to MongoDB is successfull");

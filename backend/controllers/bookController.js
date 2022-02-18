@@ -24,4 +24,11 @@ const registerBook = async (req, res) => {
   return res.status(200).send({ result });
 };
 
-export default { registerBook };
+const listBook = async (req, res) => {
+  let books = await book.find({ name: new RegExp(req.params["name"]) });
+  if (books.length === 0)
+    return res.status(400).send({ mensagge: "No search results" });
+  return res.status(200).send({ books });
+};
+
+export default { registerBook, listBook };

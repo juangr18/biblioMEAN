@@ -9,4 +9,10 @@ const existRole = async (req, res, next) => {
   next();
 };
 
-export default { existRole };
+const duplicateRole= async (req, res, next) =>{
+  const roleExist= await role.findOne({name:new RegExp(req.params["name"])});
+  if(roleExist) return res.status(400).send({menssage:"Role already exist to database."});
+  next();
+};
+
+export default { existRole,duplicateRole };

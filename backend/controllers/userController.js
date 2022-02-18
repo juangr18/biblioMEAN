@@ -35,4 +35,14 @@ const registerUser = async (req, res) => {
   }
 };
 
-export default { registerUser };
+const listUser = async (req, res) => {
+  let users = await user
+    .find({ name: new RegExp(req.params["name"]) })
+    .populate("role")
+    .exec();
+  if (users.length === 0)
+    return res.status(400).send({ menssage: "No search results" });
+  return res.status(200).send({ users });
+};
+
+export default { registerUser, listUser };

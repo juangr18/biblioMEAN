@@ -15,4 +15,11 @@ const roleRegister = async (req, res) => {
   res.status(200).send({ result });
 };
 
-export default { roleRegister };
+const listRole = async (req, res) => {
+  let roles = await role.find();
+  if (roles.length === 0)
+    return res.status(400).send({ mensagge: "No search results" });
+  return res.status(200).send({ roles });
+};
+
+export default { roleRegister, listRole };

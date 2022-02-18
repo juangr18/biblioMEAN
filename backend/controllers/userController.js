@@ -1,5 +1,4 @@
 import user from "../models/user.js";
-import role from "../models/role.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import moment from "moment";
@@ -9,12 +8,11 @@ const registerUser = async (req, res) => {
     return res.status(400).send({ menssage: "Incomplete data" });
   const pwdHash = await bcrypt.hash(req.body.password, 10);
   let schema = new user({
-    id_document: req.body.id_document,
     name: req.body.name,
     last: req.body.last,
     email: req.body.email,
     password: pwdHash,
-    role: roleId._id,
+    role: req.body.role,
     dbStatus: true,
   });
   const result = await schema.save();

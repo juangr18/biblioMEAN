@@ -5,7 +5,7 @@ const existUser = async (req, res, next) => {
     return res.status(400).send({ menssage: "Incomplete data" });
   }
   const existingEmail = await user.findOne({
-    id_document: req.body.id_document,
+    email: req.body.email,
   });
   if (existingEmail)
     return res

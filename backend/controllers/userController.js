@@ -5,19 +5,13 @@ import jwt from "jsonwebtoken";
 import moment from "moment";
 
 const registerUser = async (req, res) => {
-  if (
-    !req.body.id_document ||
-    !req.body.name ||
-    !req.body.last ||
-    !req.body.password
-  )
+  if (!req.body.name || !req.body.last || !req.body.password)
     return res.status(400).send({ menssage: "Incomplete data" });
   const pwdHash = await bcrypt.hash(req.body.password, 10);
   const roleId = await role.findOne({ name: "user" });
   if (!roleId)
     return res.status(400).send({ menssage: "No role was assigned." });
   let schema = new user({
-    id_document: req.body.id_document,
     name: req.body.name,
     last: req.body.last,
     email: req.body.email,

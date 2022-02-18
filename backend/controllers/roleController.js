@@ -16,7 +16,7 @@ const roleRegister = async (req, res) => {
 };
 
 const listRole = async (req, res) => {
-  let roles = await role.find();
+  let roles = await role.find({name:new RegExp(req.params["name"])});
   if (roles.length === 0)
     return res.status(400).send({ mensagge: "No search results" });
   return res.status(200).send({ roles });

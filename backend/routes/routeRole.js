@@ -6,6 +6,6 @@ const router = express.Router();
 
 //http://localhost:4000/api/role/registerRole
 router.post("/registerRole", roleValidate.duplicateRole, roleController.roleRegister);
-router.get("/listRole", roleController.listRole);
+router.get("/listRole/:name?", roleController.listRole);
 
 export default router;

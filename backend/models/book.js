@@ -1,17 +1,17 @@
 import mongo from "mongoose";
 
 const bookSchema = new mongo.Schema({
+  isbn: String,
   author: String,
   name: String,
-  isbn: String,
   section: [
     {
-      name: String,
+      names: String,
     },
   ],
   pages: Number,
   price: Number,
-  isAvailable: true,
+  isAvailable: Boolean,
   registerDate: {
     type: Date,
     default: Date.now,

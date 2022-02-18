@@ -8,7 +8,7 @@ const registerBook = async (req, res) => {
     !req.body.pages ||
     !req.body.price
   )
-    return res.status(400).send({ menssage: "Incomplete data." });
+    return res.status(400).send({ message: "Incomplete data." });
   let schema = new book({
     isbn: req.body.isbn,
     author: req.body.author,
@@ -20,14 +20,14 @@ const registerBook = async (req, res) => {
   });
   const result = await schema.save();
   if (!result)
-    return res.status(500).send({ menssage: "Failed to register book." });
+    return res.status(500).send({ message: "Failed to register book." });
   return res.status(200).send({ result });
 };
 
 const listBook = async (req, res) => {
   let books = await book.find({ name: new RegExp(req.params["name"]) });
   if (books.length === 0)
-    return res.status(400).send({ mensagge: "No search results" });
+    return res.status(400).send({ mesagge: "No search results" });
   return res.status(200).send({ books });
 };
 

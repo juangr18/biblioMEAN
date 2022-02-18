@@ -5,9 +5,10 @@ import moment from "moment";
 
 const registerUser = async (req, res) => {
   if (!req.body.name || !req.body.last || !req.body.password)
-    return res.status(400).send({ menssage: "Incomplete data" });
+    return res.status(400).send({ message: "Incomplete data" });
   const pwdHash = await bcrypt.hash(req.body.password, 10);
   let schema = new user({
+    id_document:req.body.id_document,
     name: req.body.name,
     last: req.body.last,
     email: req.body.email,
@@ -16,7 +17,7 @@ const registerUser = async (req, res) => {
     dbStatus: true,
   });
   const result = await schema.save();
-  if (!result) return res.status(500).send({ menssage: "Failed to Register." });
+  if (!result) return res.status(500).send({ message: "Failed to Register." });
   try {
     return res.status(200).json({
       token: jwt.sign(
@@ -31,7 +32,7 @@ const registerUser = async (req, res) => {
       ),
     });
   } catch (e) {
-    return res.status(500).send({ menssage: "Register error" });
+    return res.status(500).send({ message: "Register error" });
   }
 };
 
@@ -41,8 +42,33 @@ const listUser = async (req, res) => {
     .populate("role")
     .exec();
   if (users.length === 0)
-    return res.status(400).send({ menssage: "No search results" });
+    return res.status(400).send({ message: "No search results" });
   return res.status(200).send({ users });
 };
 
-export default { registerUser, listUser };
+const login = async (req, res) => {
+  const userLogin = await user.findOne({ email: req.body.email });
+  const msgError = "Wrong email or password.";
+  if (!userLogin || !userLogin.dbStatus)
+    return res.status(400).send({ message: msgError });
+  const passHash = await bcrypt.compare(req.body.password, userLogin.password);
+  if (!passHash) return res.status(400).send({ message: msgError });
+  try {
+    return res.status(200).json({
+      token: jwt.sign(
+        {
+          _id: userLogin.id,
+          name: userLogin.name,
+          last: userLogin.last,
+          role: userLogin.role,
+          iat: moment().unix(),
+        },
+        process.env.SK_JWT
+      ),
+    });
+  } catch (e) {
+    return res.status(500).send({ message: "Register error" });
+  }
+};
+
+export default { registerUser, listUser, login };

@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
     return res.status(400).send({ message: "Incomplete data" });
   const pwdHash = await bcrypt.hash(req.body.password, 10);
   let schema = new user({
-    id_document:req.body.id_document,
+    id_document: req.body.id_document,
     name: req.body.name,
     last: req.body.last,
     email: req.body.email,
@@ -71,4 +71,16 @@ const login = async (req, res) => {
   }
 };
 
-export default { registerUser, listUser, login };
+const deleteUser = async (req, res) => {
+  if (!req.params["_id"])
+    return res.status(400).send({ message: "Incomplete data" });
+  const users = await user.findByIdAndUpdate(req.params["_id"], {
+    dbStatus: false,
+  });
+
+  return !users
+    ? res.status(500).send({ message: "Error deleting user" })
+    : res.status(200).send({ message: "User deleted" });
+};
+
+export default { registerUser, listUser, login, deleteUser };

@@ -6,8 +6,8 @@ const isCompleteData = async (req, res, next) => {
     !req.body.author ||
     !req.body.name ||
     !req.body.section ||
-    !req.body.pages ||
-    !req.body.price
+    req.body.pages===0 ||
+    req.body.price===0
   )
     return res.status(400).send({ message: "Incomplete data." });
   next();

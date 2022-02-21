@@ -13,5 +13,9 @@ router.post(
 );
 router.get("/listBook/:name?", bookController.listBook);
 router.put("/deleteBook", bookController.deleteBook);
-router.put("/updateBook", bookController.updateBook);
+router.put(
+  "/updateBook",
+  bookValidate.isCompleteData,
+  bookController.updateBook
+);
 export default router;

@@ -1,14 +1,23 @@
 import book from "../models/book.js";
 
-const existingBook = async (req, res, next) => {
-  if (!req.body.isbn)
+const isCompleteData = async (req, res, next) => {
+  if (
+    !req.body.isbn ||
+    !req.body.author ||
+    !req.body.name ||
+    !req.body.section ||
+    !req.body.pages ||
+    !req.body.price
+  )
     return res.status(400).send({ message: "Incomplete data." });
-  const existIsbn = book.findOne(req.body.isbn);
-  if (existIsbn)
-    return res
-      .status(500)
-      .send({ message: "The book already exist in database." });
   next();
 };
 
-export default {existingBook}
+const existingBook = async (req, res, next) => {
+  const existIsbn =await book.findOne({ isbn: req.body.isbn });
+  return existIsbn
+    ? res.status(400).send({ message: "Book already exist to database." })
+    : next();
+};
+
+export default { isCompleteData, existingBook };

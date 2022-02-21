@@ -5,6 +5,7 @@ import bookValidate from "../middlewares/bookValidate.js";
 const router = express.Router();
 
 //http://localhost:4000/api/role/registerRole
-router.post("/registerBook", bookValidate.existingBook, bookController.registerBook);
+router.post("/registerBook", bookValidate.isCompleteData, bookValidate.existingBook, bookController.registerBook);
 router.get("/listBook/:name?", bookController.listBook);
+router.put("/deleteBook", bookController.deleteBook);
 export default router;

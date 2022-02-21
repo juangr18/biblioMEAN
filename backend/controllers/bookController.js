@@ -1,14 +1,6 @@
 import book from "../models/book.js";
 
 const registerBook = async (req, res) => {
-  if (
-    !req.body.author ||
-    !req.body.name ||
-    !req.body.section ||
-    !req.body.pages ||
-    !req.body.price
-  )
-    return res.status(400).send({ message: "Incomplete data." });
   let schema = new book({
     isbn: req.body.isbn,
     author: req.body.author,
@@ -31,4 +23,15 @@ const listBook = async (req, res) => {
   return res.status(200).send({ books });
 };
 
-export default { registerBook, listBook };
+const deleteBook = async (req, res) => {
+  if (!req.body._id)
+    return res.status(400).send({ message: "Incomplete data" });
+  const books = await book.findByIdAndUpdate(req.body._id, {
+    isAvailable: false,
+  });
+  return books
+    ? res.status(200).send({ message: "Delete book" })
+    : res.status(500).send({ message: "Error deleting book" });
+};
+
+export default { registerBook, listBook, deleteBook };

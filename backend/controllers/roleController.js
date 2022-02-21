@@ -16,10 +16,19 @@ const roleRegister = async (req, res) => {
 };
 
 const listRole = async (req, res) => {
-  let roles = await role.find({name:new RegExp(req.params["name"])});
+  let roles = await role.find({ name: new RegExp(req.params["name"]) });
   if (roles.length === 0)
     return res.status(400).send({ mesagge: "No search results" });
   return res.status(200).send({ roles });
 };
 
-export default { roleRegister, listRole };
+const deleteRole = async (req, res) => {
+  if (!req.params["_id"])
+    return res.status(400).send({ mesagge: "Incomplete data." });
+  const roles = await role.findByIdAndDelete(req.params["_id"]);
+  return roles
+    ? res.status(200).send({ mesagge: "Role deleted." })
+    : res.status(500).send({ mesagge: "Error deleting role" });
+};
+
+export default { roleRegister, listRole, deleteRole };

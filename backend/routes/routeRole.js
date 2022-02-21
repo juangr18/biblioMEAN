@@ -5,8 +5,13 @@ import roleValidate from "../middlewares/roleValidate.js";
 const router = express.Router();
 
 //http://localhost:4000/api/role/registerRole
-router.post("/registerRole", roleValidate.duplicateRole, roleController.roleRegister);
+router.post(
+  "/registerRole",
+  roleValidate.duplicateRole,
+  roleController.roleRegister
+);
 router.get("/listRole/:name?", roleController.listRole);
 router.delete("/deleteRole/:_id", roleController.deleteRole);
+router.put("/updateRole", roleController.updateRole);
 
 export default router;

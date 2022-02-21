@@ -34,4 +34,26 @@ const deleteBook = async (req, res) => {
     : res.status(500).send({ message: "Error deleting book" });
 };
 
-export default { registerBook, listBook, deleteBook };
+const updateBook = async (req, res) => {
+  if (
+    !req.body._id ||
+    !req.body.isbn ||
+    !req.body.author ||
+    !req.body.name ||
+    !req.body.section | !req.body.pages ||
+    !req.body.price
+  )
+    return res.status(400).send({ message: "Incomplete data" });
+  const bookUpdate = await book.findByIdAndUpdate(req.body._id, {
+    isbn: req.body.isbn,
+    author: req.body.author,
+    name: req.body.name,
+    section: req.body.section,
+    pages: req.body.pages,
+    price: req.body.price,
+  });
+  return bookUpdate
+    ? res.status(200).send({ message: "Updated book" })
+    : res.status(500).send({ message: "Error update book" });
+};
+export default { registerBook, listBook, deleteBook, updateBook };

@@ -83,4 +83,31 @@ const deleteUser = async (req, res) => {
     : res.status(200).send({ message: "User deleted" });
 };
 
-export default { registerUser, listUser, login, deleteUser };
+const updateUser = async (req, res) => {
+  if (
+    !req.body._id ||
+    !req.body.id_document ||
+    !req.body.name ||
+    !req.body.last ||
+    !req.body.email ||
+    !req.body.role
+  )
+    return res.status(400).send({ message: "Incomplete data." });
+  let pass = "";
+  if (!req.body.password) {
+    const findUser = await user.findOne({ email: req.body.email });
+    pass = findUser.password;
+  } else {
+    pass = await bcrypt.hash(req.body.password, 10);
+  }
+  const userEdit = await user.findByIdAndUpdate(req.body._id, {
+    name: req.body.name,
+    last: req.body.last,
+    role: req.body.role,
+  });
+  return userEdit
+    ? res.status(200).send({ message: "Edited user successful." })
+    : res.status(500).send({ message: "Error editing user." });
+};
+
+export default { registerUser, listUser, login, deleteUser, updateUser };

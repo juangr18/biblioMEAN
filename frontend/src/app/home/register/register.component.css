@@ -1,0 +1,23 @@
+.card {
+  min-width: 100px;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #3f3f3f;
+  color: #ffffff;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 16px 0px;
+}
+.button {
+    width: 100%;
+    background-color: #3d3838;
+    color: white;
+  }

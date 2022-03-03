@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListBookComponent } from './home/list-book/list-book.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
+    ListBookComponent,
   ],
   imports: [
     BrowserModule,

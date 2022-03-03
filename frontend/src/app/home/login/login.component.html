@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="bgRegister">
+    <div class="form">
+      <mat-card-content color="primary">
+        <mat-card class="card">
+          <mat-card-title>Login BiblioMEAN</mat-card-title>
+        </mat-card>
+        <div class="container">
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="loginData.email"
+              placeholder="Email"
+              required
+              type="email"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="loginData.password"
+              placeholder="Password"
+              required
+              type="password"
+            />
+          </mat-form-field>
+          <mat-card-actions>
+            <button class="button" mat-raised-button (click)="login()">
+              Login
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
+  

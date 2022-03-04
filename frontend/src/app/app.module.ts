@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListBookComponent } from './home/list-book/list-book.component';
+import { AuthGuard } from "./guard/auth.guard";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { ListBookComponent } from './home/list-book/list-book.component';
     MatInputModule,
     MatSnackBarModule,
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

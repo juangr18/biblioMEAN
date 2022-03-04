@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
       this.openSnackBarError();
       this.loginData = {};
     } else {
-      console.log(this.loginData);
-
       this._userService.login(this.loginData).subscribe({
         next: (v) => {
           localStorage.setItem('token', v.token);

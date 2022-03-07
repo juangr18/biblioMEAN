@@ -1,70 +1,68 @@
-<div class="bgRegister">
-    <div class="form">
-      <mat-card-content color="primary">
-        <mat-card class="card">
-          <mat-card-title>Register BiblioMEAN</mat-card-title>
-        </mat-card>
-        <div class="container">
-          <mat-form-field color="secondary">
-            <input
-              matInput
-              [(ngModel)]="registerData.isbn"
-              placeholder="ISBN of book"
-              type="text"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              matInput
-              [(ngModel)]="registerData.author"
-              placeholder="Author book"
-              type="text"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              matInput
-              [(ngModel)]="registerData.name"
-              placeholder="Name book"
-              type="text"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              matInput
-              [(ngModel)]="registerData.section.names"
-              type="text"
-              required
-              type="Names sections"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              matInput
-              [(ngModel)]="registerData.pages"
-              placeholder="Pages of book"
-              required
-              type="number"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              matInput
-              [(ngModel)]="registerData.price"
-              placeholder="Price of book"
-              required
-              type="number"
-            />
-          </mat-form-field>
-          <mat-card-actions>
-            <button class="button" mat-raised-button (click)="registerBook()">
-              Register now
-            </button>
-          </mat-card-actions>
-        </div>
-      </mat-card-content>
-    </div>
-  </div>
+<div class="form">
+  <mat-card class="card">
+    <mat-card-title>Add book</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.isbn"
+            type="text"
+            matInput
+            placeholder="ISBN of book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.author"
+            type="text"
+            matInput
+            placeholder="Author/s of book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.name"
+            type="text"
+            matInput
+            placeholder="Name book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.names"
+            type="text"
+            matInput
+            placeholder="Sections names of book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.pages"
+            type="number"
+            matInput
+            placeholder="Pages of book"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            [(ngModel)]="registerData.price"
+            type="number"
+            matInput
+            placeholder="Price of book"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="registerBook()" class="button" mat-raised-button>
+        Add book
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

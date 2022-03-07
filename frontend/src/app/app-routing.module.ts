@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 import { ListBookComponent } from './home/list-book/list-book.component';
 import { LoginComponent } from './home/login/login.component';
+import { RegisterBookComponent } from './home/register-book/register-book.component';
 import { RegisterComponent } from './home/register/register.component';
 
 const routes: Routes = [
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'listBook',
     component: ListBookComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'addBook',
+    component: RegisterBookComponent,
     canActivate:[AuthGuard]
   },
 ];

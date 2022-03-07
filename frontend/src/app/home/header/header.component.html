@@ -16,6 +16,14 @@
       aria-current="page"
       >List Book</a
     >
+    <a
+      *ngIf="_userService.loggedIn()"
+      mat-button
+      routerLink="addBook"
+      class="nav-link link-light px-2 active"
+      aria-current="page"
+      >Add book</a
+    >
   </ul>
   <span class="spacer"></span>
   <ul class="nav">

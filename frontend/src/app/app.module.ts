@@ -10,16 +10,20 @@ import { UserService } from './services/user.service';
 import { LoginComponent } from './home/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatIconModule } from '@angular/material/icon';
 import { ListBookComponent } from './home/list-book/list-book.component';
-import { AuthGuard } from "./guard/auth.guard";
+import { AuthGuard } from './guard/auth.guard';
 import { RegisterBookComponent } from './home/register-book/register-book.component';
+import { TaskService } from './services/task.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,16 @@ import { RegisterBookComponent } from './home/register-book/register-book.compon
     MatInputModule,
     MatSnackBarModule,
   ],
-  providers: [UserService, AuthGuard],
+  providers: [
+    UserService,
+    AuthGuard,
+    TaskService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

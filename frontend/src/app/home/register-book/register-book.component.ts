@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from "../../services/task.service";
+import { TaskService } from '../../services/task.service';
 import { Router } from '@angular/router';
 import {
   MatSnackBar,
@@ -9,10 +9,9 @@ import {
 @Component({
   selector: 'app-register-book',
   templateUrl: './register-book.component.html',
-  styleUrls: ['./register-book.component.css']
+  styleUrls: ['./register-book.component.css'],
 })
 export class RegisterBookComponent implements OnInit {
-
   registerData: any;
   message: string = '';
   positionHorizontal: MatSnackBarHorizontalPosition = 'right';
@@ -26,54 +25,50 @@ export class RegisterBookComponent implements OnInit {
     this.registerData = {};
   }
 
-  registerBook(){
-  if (
-    !this.registerData.isbn ||
-    !this.registerData.author ||
-    !this.registerData.name ||
-    !this.registerData.section ||
-    this.registerData.pages===0 ||
-    this.registerData.price===0
-  ) {
-    this.message = 'Incomplete data';
-    this.openSnackBarError();
-    this.registerData = {};
-  } else {
-    console.log(this.registerData);
+  registerBook() {
+    if (
+      !this.registerData.isbn ||
+      !this.registerData.author ||
+      !this.registerData.name ||
+      !this.registerData.names ||
+      this.registerData.pages === 0 ||
+      this.registerData.price === 0
+    ) {
+      this.message = 'Incomplete data';
+      this.openSnackBarError();
+      this.registerData = {};
+    } else {
+      this._taskService.registerBook(this.registerData).subscribe({
+        next: () => {
+          this._router.navigate(['/listBook']);
+          this.message = 'Successful register book';
+          this.openSnackBarSuccesful();
+        },
+        error: (err) => {
+          this.message = err.error.message;
+          this.openSnackBarError();
+        },
+      });
+    }
+  }
 
-    this._taskService.registerBook(this.registerData).subscribe({
-      next: (v) => {
-        this._router.navigate(['/listBook']);
-        this.message = 'Successful register book';
-        this.openSnackBarSuccesful();
-      },
-      error: (err) => {
-        this.message = err.error.message;
-        this.openSnackBarError();
-      },
+  openSnackBarSuccesful() {
+    this._snackBar.open(this.message, 'X', {
+      horizontalPosition: this.positionHorizontal,
+      verticalPosition: this.positionVertical,
+      duration: 1500,
+      panelClass: ['snackBarSuccesful'],
     });
   }
-}
 
-openSnackBarSuccesful() {
-  this._snackBar.open(this.message, 'X', {
-    horizontalPosition: this.positionHorizontal,
-    verticalPosition:this.positionVertical,
-    duration: 1500,
-    panelClass: ['snackBarSuccesful'],
-  });
-}
-
-openSnackBarError() {
-  this._snackBar.open(this.message, 'X', {
-    horizontalPosition: this.positionHorizontal,
-    verticalPosition:this.positionVertical,
-    duration: 1500,
-    panelClass: ['snackBarError'],
-  });
-}
-
-  ngOnInit(): void {
+  openSnackBarError() {
+    this._snackBar.open(this.message, 'X', {
+      horizontalPosition: this.positionHorizontal,
+      verticalPosition: this.positionVertical,
+      duration: 1500,
+      panelClass: ['snackBarError'],
+    });
   }
 
+  ngOnInit(): void {}
 }

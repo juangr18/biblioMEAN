@@ -5,7 +5,7 @@ const isCompleteData = async (req, res, next) => {
     !req.body.isbn ||
     !req.body.author ||
     !req.body.name ||
-    !req.body.section ||
+    req.body.section===0 ||
     req.body.pages===0 ||
     req.body.price===0
   )

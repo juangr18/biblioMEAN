@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListBookComponent } from './home/list-book/list-book.component';
 import { AuthGuard } from "./guard/auth.guard";
+import { RegisterBookComponent } from './home/register-book/register-book.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthGuard } from "./guard/auth.guard";
     RegisterComponent,
     LoginComponent,
     ListBookComponent,
+    RegisterBookComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,70 @@
+<div class="bgRegister">
+    <div class="form">
+      <mat-card-content color="primary">
+        <mat-card class="card">
+          <mat-card-title>Register BiblioMEAN</mat-card-title>
+        </mat-card>
+        <div class="container">
+          <mat-form-field color="secondary">
+            <input
+              matInput
+              [(ngModel)]="registerData.isbn"
+              placeholder="ISBN of book"
+              type="text"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="registerData.author"
+              placeholder="Author book"
+              type="text"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="registerData.name"
+              placeholder="Name book"
+              type="text"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="registerData.section.names"
+              type="text"
+              required
+              type="Names sections"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="registerData.pages"
+              placeholder="Pages of book"
+              required
+              type="number"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="registerData.price"
+              placeholder="Price of book"
+              required
+              type="number"
+            />
+          </mat-form-field>
+          <mat-card-actions>
+            <button class="button" mat-raised-button (click)="registerBook()">
+              Register now
+            </button>
+          </mat-card-actions>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>

@@ -5,14 +5,23 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class TaskService {
+export class BookService {
   private env: string;
 
   constructor(private _http: HttpClient) {
     this.env = environment.APP_URL;
   }
 
-  registerBook(book:any) {
+  registerBook(book: any) {
     return this._http.post<any>(this.env + 'book/registerBook', book);
+  }
+  listBook() {
+    return this._http.get<any>(this.env + 'book/listBook');
+  }
+  deleteBook(book: any) {
+    return this._http.put<any>(this.env + 'book/deleteBook', book);
+  }
+  updateBook(book: any) {
+    return this._http.put<any>(this.env + 'book/updateBook', book);
   }
 }

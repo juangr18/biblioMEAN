@@ -22,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ListBookComponent } from './home/list-book/list-book.component';
 import { AuthGuard } from './guard/auth.guard';
 import { RegisterBookComponent } from './home/register-book/register-book.component';
-import { TaskService } from './services/task.service';
+import { BookService } from './services/book.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
@@ -48,11 +48,13 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     MatCardModule,
     MatInputModule,
     MatSnackBarModule,
+    CdkAccordionModule,
+    MatIconModule,
   ],
   providers: [
     UserService,
     AuthGuard,
-    TaskService,
+    BookService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

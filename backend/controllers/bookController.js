@@ -35,8 +35,6 @@ const deleteBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  if (!req.body._id)
-    return res.status(400).send({ message: "Incomplete data" });
   const bookUpdate = await book.findByIdAndUpdate(req.body._id, {
     isbn: req.body.isbn,
     author: req.body.author,

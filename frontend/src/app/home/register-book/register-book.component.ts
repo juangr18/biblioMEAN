@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../../services/task.service';
+import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
 import {
   MatSnackBar,
@@ -18,7 +18,7 @@ export class RegisterBookComponent implements OnInit {
   positionVertical: MatSnackBarVerticalPosition = 'top';
 
   constructor(
-    private _taskService: TaskService,
+    private _bookService: BookService,
     private _router: Router,
     private _snackBar: MatSnackBar
   ) {
@@ -38,7 +38,7 @@ export class RegisterBookComponent implements OnInit {
       this.openSnackBarError();
       this.registerData = {};
     } else {
-      this._taskService.registerBook(this.registerData).subscribe({
+      this._bookService.registerBook(this.registerData).subscribe({
         next: () => {
           this._router.navigate(['/listBook']);
           this.message = 'Successful register book';

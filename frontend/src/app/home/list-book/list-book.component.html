@@ -1,16 +1,18 @@
-<div class="w-100 d-inline-flex" *ngIf="bookData.length">
-  <div class="contentList m-auto" *ngFor="let book of bookData">
-    <div class="card m-auto p-4" style="width: 18rem" *ngIf="book.isAvailable">
-      <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">ISBN:{{ book.isbn }}</p>
-        <p class="card-text">Author:{{ book.author }}</p>
-        <p class="card-text" *ngFor="let section of book.section">
-          Sections:{{ section.names }}
-        </p>
-        <p class="card-text">:{{ book.pages }}</p>
-        <p class="card-text">:{{ book.price }}</p>
-        <mat-icon color="primary" (click)="deleteBook(book)">delete</mat-icon>
+<div class="contentList w-100 d-inline-flex" *ngIf="bookData.length">
+  <div class="m-auto" *ngFor="let book of bookData">
+    <div class="card m-auto p-4" *ngIf="book.isAvailable">
+      <div class="contentList" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">ISBN:{{ book.isbn }}</p>
+          <p class="card-text">Author:{{ book.author }}</p>
+          <p class="card-text" *ngFor="let section of book.section">
+            Sections:{{ section.names }}
+          </p>
+          <p class="card-text">:{{ book.pages }}</p>
+          <p class="card-text">:{{ book.price }}</p>
+          <mat-icon color="primary" (click)="deleteBook(book)">delete</mat-icon>
+        </div>
       </div>
     </div>
   </div>

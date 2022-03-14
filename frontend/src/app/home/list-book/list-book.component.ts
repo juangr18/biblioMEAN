@@ -38,8 +38,12 @@ export class ListBookComponent implements OnInit {
   deleteBook(book: any) {
     this._bookService.deleteBook(book).subscribe({
       next: (v) => {
-        this.message = v.message;
-        this.openSnackBarSuccesful();
+        let index = this.bookData.indexOf(book);
+        if (index > -1) {
+          this.bookData.splice(index, 1);
+          this.message = v.message;
+          this.openSnackBarSuccesful();
+        }
       },
       error: (e) => {
         this.message = e.error.message;
